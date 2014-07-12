@@ -10,6 +10,7 @@ import org.atmosphere.config.service.ManagedService;
 import org.atmosphere.config.service.Ready;
 import org.atmosphere.cpr.AtmosphereResource;
 import org.atmosphere.cpr.AtmosphereResourceEvent;
+import org.springframework.stereotype.Component;
 
 /**
  * Provides a mean for visitors to register to subscribe to the "toast"
@@ -17,6 +18,7 @@ import org.atmosphere.cpr.AtmosphereResourceEvent;
  * 
  * @author Andreas Kluth
  */
+@Component
 @ManagedService(path = "/websocket/toast")
 public class ToastService {
 
