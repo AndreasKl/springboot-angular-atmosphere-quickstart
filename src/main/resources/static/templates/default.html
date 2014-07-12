@@ -1,1 +1,6 @@
-Static content served by Angular {{version}}.
+<p>
+Template served by Angular {{version}}.
+</p>
+<p ng-repeat="message in messages track by $index">
+    {{message}}
+</p>
