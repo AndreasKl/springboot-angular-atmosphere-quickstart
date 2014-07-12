@@ -13,15 +13,16 @@ import org.atmosphere.cpr.AtmosphereResourceEvent;
 import org.springframework.stereotype.Component;
 
 /**
- * Provides a mean for visitors to register to subscribe to the "toast"
- * messages.
+ * Provides a means for visitors to subscribe to "toast" messages.
  * 
  * @author Andreas Kluth
  */
 @Component
-@ManagedService(path = "/websocket/toast")
+@ManagedService(path = ToastService.PATH)
 public class ToastService {
 
+  public static final String PATH = "/websocket/toast";
+  
   private final Log log = LogFactory.getLog(getClass());
 
   @Get
