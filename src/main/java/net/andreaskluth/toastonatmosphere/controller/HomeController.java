@@ -21,6 +21,11 @@ public class HomeController {
 
   private MetaBroadcaster broadcaster;
 
+  /**
+   * Creates a new instance of {@link HomeController}.
+   * 
+   * @param metaBroadcaster the atmosphere meta broadcaster.
+   */
   @Autowired
   public HomeController(MetaBroadcaster metaBroadcaster) {
     if (metaBroadcaster == null) {
@@ -29,6 +34,11 @@ public class HomeController {
     this.broadcaster = metaBroadcaster;
   }
 
+  /**
+   * Home action.
+   * 
+   * @return the index page.
+   */
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String home() {
     return "index";

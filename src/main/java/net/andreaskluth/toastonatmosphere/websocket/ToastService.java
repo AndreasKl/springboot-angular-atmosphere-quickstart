@@ -27,6 +27,7 @@ public class ToastService {
 
   @Get
   public void init(AtmosphereResource resource) {
+    // Set the character encoding as atmospheres default is not unicode.
     resource.getResponse().setCharacterEncoding(Charsets.UTF_8);
   }
 

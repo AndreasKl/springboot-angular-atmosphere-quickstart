@@ -79,14 +79,21 @@ public class WebConfigurer implements ServletContextInitializer {
     atmosphereServlet.setAsyncSupported(true);
   }
 
+  /**
+   * Disables the analytics functionality of atmosphere otherwise it would contact google analytics.
+   */
   public class NoAnalyticsAtmosphereFramework extends AtmosphereFramework {
 
+    /**
+     * Creates a new instance of {@link NoAnalyticsAtmosphereFramework}.
+     */
     public NoAnalyticsAtmosphereFramework() {
       super();
     }
 
     @Override
     protected void analytics() {
+      // NOOP
     }
 
   }
