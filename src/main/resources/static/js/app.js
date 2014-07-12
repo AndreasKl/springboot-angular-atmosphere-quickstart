@@ -25,7 +25,7 @@
     var websocketRequest = {
       url : '/websocket/toast',
       contentType : "application/json",
-      transport : $rootScope.websocketTransport,
+      transport : websocketTransport,
       trackMessageLength : true,
       withCredentials : true,
       reconnectInterval : 5000,
@@ -34,6 +34,7 @@
     };
 
     websocketRequest.onOpen = function(response) {
+      console.log('Trying to use transport: ' + response.transport);
       websocketTransport = response.transport;
     };
 
@@ -44,7 +45,7 @@
     };
 
     websocketRequest.onClose = function(response) {
-      console.log('Server closed websocket connection.')
+      console.log('Server closed websocket connection. Changing transport to: '+ response.transport);
     };
 
     websocketRequest.onMessage = function(data) {
