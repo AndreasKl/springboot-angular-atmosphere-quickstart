@@ -35,7 +35,7 @@ public class HomeController {
   }
 
   /**
-   * Broadcast a message to a registered clients.
+   * Broadcast a message to all registered clients.
    * 
    * @param message to broadcast.
    */
