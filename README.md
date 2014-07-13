@@ -8,6 +8,6 @@ Simplistic setup of a spring boot application with embedded Tomcat 8 with websoc
 * Atmosphere 2
 * Web artifacts are embedded as WebJar (angularjs, jquery-atmosphere, bootstrap3)
 
-Run `mvn package` to build the `jar` and `java -jar toast-on-atmosphere-x.x.x-SNAPSHOT.jar` to run the server on `localhost:8080`. To broadcast to all logged in clients GET `localhost:8080/broadcast/MyMessage`. To log out GET `localhost:8080/logout`.
+Run `mvn` to build the `jar` and `java -jar toast-on-atmosphere-x.x.x-SNAPSHOT.jar` to run the server on `localhost:8080`. To broadcast to all logged in clients GET `localhost:8080/broadcast/MyMessage`. To log out GET `localhost:8080/logout`.
 
 ![Login](http://andreaskluth.net/assets/2014-07-13%2017.31.15.png)
