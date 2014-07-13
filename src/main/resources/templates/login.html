@@ -1,0 +1,52 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>toast on atmosphere</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+  </head>
+  <body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-md-4 col-md-offset-4">
+				<h1 class="text-center login-title">toast on atmosphere</h1>
+				<h4 class="text-center">[User: admin PW: adm1n]</h4>
+				<div class="account-wall">
+					<img class="profile-img" th:src="@{/images/cat.png}" />
+					<form class="form-signin" name="login" th:action="@{/login}" method="post">    
+						<input id="username" name="username" type="text" class="form-control" placeholder="User name" required autofocus> 
+						<input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+						<span class="clearfix"></span>
+					</form>
+					<p th:if="${param.error}" class="bg-danger text-center">    
+            <span th:text="${error}"></span>
+          </p>
+           <p class="text-center">    
+            <small>Icon from <a href="http://iconka.com/">iconka.com</a></small>
+          </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery-atmosphere/2.1.6/jquery.atmosphere-min.js}"></script>
+    <script th:src="@{/webjars/angularjs/1.3.0-beta.13/angular.min.js}"></script>
+    <script th:src="@{/webjars/angularjs/1.3.0-beta.13/angular-animate.min.js}"></script>
+    <script th:src="@{/webjars/angularjs/1.3.0-beta.13/angular-cookies.min.js}"></script>
+    <script th:src="@{/webjars/angularjs/1.3.0-beta.13/angular-route.min.js}"></script>    
+  </body>
+</html>

@@ -30,7 +30,7 @@ public class Application {
     if (System.getenv("debug") != null && "true".equals(System.getenv("debug"))) {
       defaultProperties.put("spring.thymeleaf.cache", false);
     }
-    defaultProperties.put("server.session-timeout", 10);
+    defaultProperties.put("server.session-timeout", 60);
     defaultProperties.put("spring.thymeleaf.mode", "LEGACYHTML5");
     return defaultProperties;
   }

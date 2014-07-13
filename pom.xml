@@ -38,7 +38,7 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
+      <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
     <!-- Template Engine -->
     <dependency>
@@ -77,6 +77,12 @@
       <groupId>org.webjars</groupId>
       <artifactId>jquery-atmosphere</artifactId>
       <version>2.1.6</version>
+    </dependency>
+    <!-- HTML -->
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>3.2.0</version>
     </dependency>
     <!-- Testing -->
     <dependency>
