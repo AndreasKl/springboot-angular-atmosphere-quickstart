@@ -15,6 +15,14 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <requiresUnpack>
+            <dependency>
+              <groupId>org.atmosphere</groupId>
+              <artifactId>atmosphere-runtime</artifactId>
+            </dependency>
+          </requiresUnpack>
+        </configuration>
       </plugin>
     </plugins>
   </build>
@@ -71,13 +79,8 @@
       <version>${js.angular.version}</version>
     </dependency>
     <!-- Currently not available as webjar -->
-    <!--
-    <dependency>
-      <groupId>org.webjars</groupId>
-      <artifactId>jquery-atmosphere</artifactId>
-      <version>${atmosphere.version}</version>
-    </dependency>
-    -->
+    <!-- <dependency> <groupId>org.webjars</groupId> <artifactId>jquery-atmosphere</artifactId> <version>${atmosphere.version}</version> 
+      </dependency> -->
     <!-- HTML -->
     <dependency>
       <groupId>org.webjars</groupId>
