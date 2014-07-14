@@ -29,12 +29,13 @@ public class WebConfigurer implements ServletContextInitializer {
 
   @Override
   public void onStartup(ServletContext servletContext) throws ServletException {
-    configureAthmosphere(servletContext);
+    configureAthmosphere(atmosphereFramework(), servletContext);
   }
 
   @Bean
-  public MetaBroadcaster metaBroadcaster(AtmosphereFramework atmosphereFramework) {
-    return atmosphereFramework.metaBroadcaster();
+  public MetaBroadcaster metaBroadcaster() {
+    AtmosphereFramework framework = atmosphereFramework();
+    return framework.metaBroadcaster();
   }
 
   @Bean
@@ -42,11 +43,11 @@ public class WebConfigurer implements ServletContextInitializer {
     return new NoAnalyticsAtmosphereFramework();
   }
 
-  private void configureAthmosphere(ServletContext servletContext) {
+  private void configureAthmosphere(AtmosphereFramework framework,ServletContext servletContext) {
     AtmosphereServlet servlet = new AtmosphereServlet();
     Field frameworkField = ReflectionUtils.findField(AtmosphereServlet.class, "framework");
     ReflectionUtils.makeAccessible(frameworkField);
-    ReflectionUtils.setField(frameworkField, servlet, atmosphereFramework());
+    ReflectionUtils.setField(frameworkField, servlet, framework);
 
     ServletRegistration.Dynamic atmosphereServlet = servletContext.addServlet("atmosphereServlet", servlet);
     atmosphereServlet.setInitParameter(ApplicationConfig.ANNOTATION_PACKAGE, ToastService.class.getPackage().getName());
@@ -57,9 +58,6 @@ public class WebConfigurer implements ServletContextInitializer {
 
     servletContext.addListener(new org.atmosphere.cpr.SessionSupport());
     atmosphereServlet.addMapping("/websocket/*");
-    // Set the loadOnStartup priority to sth. higher than -1 to avoid lazy
-    // instantiation which would cause issues with injecting the
-    // BroadcasterFactory.
     atmosphereServlet.setLoadOnStartup(0);
     atmosphereServlet.setAsyncSupported(true);
   }
