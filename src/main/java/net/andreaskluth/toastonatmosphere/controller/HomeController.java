@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class HomeController {
 
-  private MetaBroadcaster broadcaster;
+  private final MetaBroadcaster broadcaster;
 
   /**
    * Creates a new instance of {@link HomeController}.
@@ -29,7 +29,7 @@ public class HomeController {
   @Autowired
   public HomeController(MetaBroadcaster metaBroadcaster) {
     if (metaBroadcaster == null) {
-      throw new NullPointerException("metaBroadcaster");
+      throw new NullPointerException("metaBroadcaster must not be null");
     }
     this.broadcaster = metaBroadcaster;
   }
