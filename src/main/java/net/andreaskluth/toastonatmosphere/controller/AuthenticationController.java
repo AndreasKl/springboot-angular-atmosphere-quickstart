@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Controller to handle login and log out of users.
  * 
- * @author Andreas Kluth <mail@andreaskluth.net>
+ * @author Andreas Kluth
  */
 @Controller
 public class AuthenticationController {

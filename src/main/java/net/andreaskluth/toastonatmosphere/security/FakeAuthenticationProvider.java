@@ -1,4 +1,4 @@
-package security;
+package net.andreaskluth.toastonatmosphere.security;
 
 import java.util.ArrayList;
 import java.util.List;
