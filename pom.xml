@@ -30,7 +30,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.7</java.version>
-    <atmosphere.version>2.2.0-SNAPSHOT</atmosphere.version>
+    <atmosphere.version>2.2.0</atmosphere.version>
     <nekohtml.version>1.9.21</nekohtml.version>
     <js.angular.version>1.3.0-beta.13</js.angular.version>
   </properties>
