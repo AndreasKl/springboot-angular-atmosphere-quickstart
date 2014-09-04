@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.andreaskluth</groupId>
   <artifactId>toast-on-atmosphere</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.1.4.RELEASE</version>
+    <version>1.1.5.RELEASE</version>
   </parent>
   <build>
     <defaultGoal>install</defaultGoal>
@@ -32,7 +32,8 @@
     <java.version>1.7</java.version>
     <atmosphere.version>2.2.0</atmosphere.version>
     <nekohtml.version>1.9.21</nekohtml.version>
-    <js.angular.version>1.3.0-beta.13</js.angular.version>
+    <js.angular.version>1.3.0-rc.0</js.angular.version>
+    <tomcat.version>8.0.11</tomcat.version>
   </properties>
   <dependencies>
     <!-- Base -->
@@ -65,6 +66,11 @@
       <groupId>org.atmosphere</groupId>
       <artifactId>atmosphere-spring</artifactId>
       <version>${atmosphere.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-websocket</artifactId>
+      <version>${tomcat.version}</version>
     </dependency>
     <!-- JS -->
     <dependency>

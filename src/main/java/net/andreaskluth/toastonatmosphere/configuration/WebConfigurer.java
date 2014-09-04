@@ -43,7 +43,7 @@ public class WebConfigurer implements ServletContextInitializer {
     return new NoAnalyticsAtmosphereFramework();
   }
 
-  private void configureAthmosphere(AtmosphereFramework framework,ServletContext servletContext) {
+  private void configureAthmosphere(AtmosphereFramework framework, ServletContext servletContext) {
     AtmosphereServlet servlet = new AtmosphereServlet();
     Field frameworkField = ReflectionUtils.findField(AtmosphereServlet.class, "framework");
     ReflectionUtils.makeAccessible(frameworkField);
@@ -55,7 +55,9 @@ public class WebConfigurer implements ServletContextInitializer {
     atmosphereServlet.setInitParameter(ApplicationConfig.BROADCASTER_SHARABLE_THREAD_POOLS, "true");
     atmosphereServlet.setInitParameter(ApplicationConfig.BROADCASTER_MESSAGE_PROCESSING_THREADPOOL_MAXSIZE, "10");
     atmosphereServlet.setInitParameter(ApplicationConfig.BROADCASTER_ASYNC_WRITE_THREADPOOL_MAXSIZE, "10");
-    atmosphereServlet.setInitParameter(ApplicationConfig.JSR356_MAPPING_PATH, "/websocket/*");
+    
+    // FIXME: Adding makes the application work.
+    // atmosphereServlet.setInitParameter(ApplicationConfig.JSR356_MAPPING_PATH, "/websocket/*");
 
     servletContext.addListener(new org.atmosphere.cpr.SessionSupport());
     atmosphereServlet.addMapping("/websocket/*");
