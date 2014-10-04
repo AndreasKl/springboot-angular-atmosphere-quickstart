@@ -30,13 +30,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   }
   
   @Bean
-  public AuthenticationProvider authenticationProvider() {
+  public AuthenticationProvider provider() {
     return new FakeAuthenticationProvider(passwordEncoder());
   }
 
   @Autowired
-  public void configureGlobal(AuthenticationManagerBuilder auth, AuthenticationProvider authenticationProvider) throws Exception {
-    auth.authenticationProvider(authenticationProvider);
+  public void configureGlobal(AuthenticationManagerBuilder auth, AuthenticationProvider provider) throws Exception {
+    auth.authenticationProvider(provider);
   }
 
   @Override
