@@ -1,7 +1,5 @@
 package net.andreaskluth.toastonatmosphere.configuration;
 
-import java.lang.reflect.Field;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -16,7 +14,6 @@ import org.atmosphere.cpr.MetaBroadcaster;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.ReflectionUtils;
 
 /**
  * Configures an {@link AtmosphereServlet} and announces it to the
@@ -27,28 +24,28 @@ import org.springframework.util.ReflectionUtils;
 @Configuration
 public class WebConfigurer implements ServletContextInitializer {
 
-  @Override
-  public void onStartup(ServletContext servletContext) throws ServletException {
-    configureAthmosphere(atmosphereFramework(), servletContext);
+  @Bean
+  public AtmosphereServlet atmosphereServlet(){
+    return new AtmosphereServlet();
   }
 
+  @Bean
+  public AtmosphereFramework atmosphereFramework() {
+    return atmosphereServlet().framework();
+  }
+  
   @Bean
   public MetaBroadcaster metaBroadcaster() {
     AtmosphereFramework framework = atmosphereFramework();
     return framework.metaBroadcaster();
   }
-
-  @Bean
-  public AtmosphereFramework atmosphereFramework() {
-    return new NoAnalyticsAtmosphereFramework();
+  
+  @Override
+  public void onStartup(ServletContext servletContext) throws ServletException {
+    configureAthmosphere(atmosphereServlet(), servletContext);
   }
 
-  private void configureAthmosphere(AtmosphereFramework framework,ServletContext servletContext) {
-    AtmosphereServlet servlet = new AtmosphereServlet();
-    Field frameworkField = ReflectionUtils.findField(AtmosphereServlet.class, "framework");
-    ReflectionUtils.makeAccessible(frameworkField);
-    ReflectionUtils.setField(frameworkField, servlet, framework);
-
+  private void configureAthmosphere(AtmosphereServlet servlet, ServletContext servletContext) {
     ServletRegistration.Dynamic atmosphereServlet = servletContext.addServlet("atmosphereServlet", servlet);
     atmosphereServlet.setInitParameter(ApplicationConfig.ANNOTATION_PACKAGE, ToastService.class.getPackage().getName());
     atmosphereServlet.setInitParameter(ApplicationConfig.BROADCASTER_CACHE, UUIDBroadcasterCache.class.getName());
@@ -61,26 +58,6 @@ public class WebConfigurer implements ServletContextInitializer {
     atmosphereServlet.addMapping("/websocket/*");
     atmosphereServlet.setLoadOnStartup(0);
     atmosphereServlet.setAsyncSupported(true);
-  }
-
-  /**
-   * Disables the analytics functionality of atmosphere otherwise it would
-   * contact google analytics.
-   */
-  public class NoAnalyticsAtmosphereFramework extends AtmosphereFramework {
-
-    /**
-     * Creates a new instance of {@link NoAnalyticsAtmosphereFramework}.
-     */
-    public NoAnalyticsAtmosphereFramework() {
-      super();
-    }
-
-    @Override
-    protected void analytics() {
-      // NOOP
-    }
-
   }
 
 }

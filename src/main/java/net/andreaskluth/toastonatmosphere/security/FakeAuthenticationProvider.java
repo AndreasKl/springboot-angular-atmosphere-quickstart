@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +29,7 @@ public class FakeAuthenticationProvider implements AuthenticationProvider {
 
   private final String saltedAndHashedSecret;
 
-  private final PasswordEncoder passwordEncoder;
+  private final PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
 
   /**
    * Creates a new instance of {@link FakeAuthenticationProvider}.
@@ -36,13 +37,8 @@ public class FakeAuthenticationProvider implements AuthenticationProvider {
    * @param encoder
    *          to hash and salt passwords.
    */
-  @Autowired
-  public FakeAuthenticationProvider(PasswordEncoder passwordEncoder) {
-    if (passwordEncoder == null) {
-      throw new NullPointerException("passwordEncoder must not be null");
-    }
-    this.passwordEncoder = passwordEncoder;
-    this.saltedAndHashedSecret = passwordEncoder.encode(HARD_CODED_SUPER_SECRET_PW);
+  public FakeAuthenticationProvider() {
+    saltedAndHashedSecret = passwordEncoder.encode(HARD_CODED_SUPER_SECRET_PW);
   }
 
   @Override

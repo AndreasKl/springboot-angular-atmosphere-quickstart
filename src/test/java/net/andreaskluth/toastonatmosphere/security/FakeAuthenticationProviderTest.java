@@ -6,8 +6,6 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Test suite for {@link FakeAuthenticationProvider}.
@@ -43,8 +41,7 @@ public class FakeAuthenticationProviderTest {
   }
 
   private AuthenticationProvider createProvider() {
-    PasswordEncoder encoder = NoOpPasswordEncoder.getInstance();
-    return new FakeAuthenticationProvider(encoder);
+    return new FakeAuthenticationProvider();
   }
 
   private TestingAuthenticationToken createAuthenticationTokenWithUserAndPw(String username, String password) {
