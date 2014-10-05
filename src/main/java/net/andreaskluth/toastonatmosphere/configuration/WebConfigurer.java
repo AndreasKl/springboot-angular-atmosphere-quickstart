@@ -1,5 +1,6 @@
 package net.andreaskluth.toastonatmosphere.configuration;
 
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -33,7 +34,7 @@ public class WebConfigurer implements ServletContextInitializer {
   public AtmosphereFramework atmosphereFramework() {
     return atmosphereServlet().framework();
   }
-  
+
   @Bean
   public MetaBroadcaster metaBroadcaster() {
     AtmosphereFramework framework = atmosphereFramework();
@@ -52,8 +53,6 @@ public class WebConfigurer implements ServletContextInitializer {
     atmosphereServlet.setInitParameter(ApplicationConfig.BROADCASTER_SHARABLE_THREAD_POOLS, "true");
     atmosphereServlet.setInitParameter(ApplicationConfig.BROADCASTER_MESSAGE_PROCESSING_THREADPOOL_MAXSIZE, "10");
     atmosphereServlet.setInitParameter(ApplicationConfig.BROADCASTER_ASYNC_WRITE_THREADPOOL_MAXSIZE, "10");
-    atmosphereServlet.setInitParameter(ApplicationConfig.JSR356_MAPPING_PATH, "/websocket/*");
-
     servletContext.addListener(new org.atmosphere.cpr.SessionSupport());
     atmosphereServlet.addMapping("/websocket/*");
     atmosphereServlet.setLoadOnStartup(0);
