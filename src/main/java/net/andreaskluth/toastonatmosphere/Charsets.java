@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 public final class Charsets {
   
   /**
-   * 'UTF-8' name.
+   * UTF-8 name.
    */
   public static final String UTF_8 = StandardCharsets.UTF_8.name();
 }
