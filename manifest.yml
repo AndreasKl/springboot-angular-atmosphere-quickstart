@@ -1,0 +1,7 @@
+---
+applications:
+- name: angular-quickstart
+  memory: 512M
+  instances: 1
+  host: angular-quickstart-${random-word}
+  path: target/toast-on-atmosphere-0.0.4-SNAPSHOT.jar
