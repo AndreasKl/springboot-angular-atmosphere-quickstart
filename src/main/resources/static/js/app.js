@@ -18,7 +18,7 @@
 
   app.factory('ToastService', [ '$rootScope', function($rootScope) {
     var messages = [];
-    var websocketSocket = $.atmosphere;
+    var websocketSocket = atmosphere;
     var websocketSubSocket;
     var websocketTransport = 'websocket';
 
