@@ -1,5 +1,6 @@
 package net.andreaskluth.toastonatmosphere.configuration;
 
+import java.util.Collections;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -7,12 +8,16 @@ import javax.servlet.ServletRegistration;
 
 import net.andreaskluth.toastonatmosphere.websocket.ToastService;
 
+import org.apache.catalina.Context;
+import org.apache.tomcat.websocket.server.WsSci;
 import org.atmosphere.cache.UUIDBroadcasterCache;
 import org.atmosphere.cpr.ApplicationConfig;
 import org.atmosphere.cpr.AtmosphereFramework;
 import org.atmosphere.cpr.AtmosphereServlet;
 import org.atmosphere.cpr.MetaBroadcaster;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
+import org.springframework.boot.context.embedded.tomcat.TomcatContextCustomizer;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,7 +31,24 @@ import org.springframework.context.annotation.Configuration;
 public class WebConfigurer implements ServletContextInitializer {
 
   @Bean
-  public AtmosphereServlet atmosphereServlet(){
+  public TomcatEmbeddedServletContainerFactory tomcatContainerFactory() {
+    TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
+    factory.setTomcatContextCustomizers(Collections.singletonList(tomcatContextCustomizer()));
+    return factory;
+  }
+
+  @Bean
+  public TomcatContextCustomizer tomcatContextCustomizer() {
+    return new TomcatContextCustomizer() {
+      @Override
+      public void customize(Context context) {
+        context.addServletContainerInitializer(new WsSci(), null);
+      }
+    };
+  }
+
+  @Bean
+  public AtmosphereServlet atmosphereServlet() {
     return new AtmosphereServlet();
   }
 
@@ -40,7 +62,7 @@ public class WebConfigurer implements ServletContextInitializer {
     AtmosphereFramework framework = atmosphereFramework();
     return framework.metaBroadcaster();
   }
-  
+
   @Override
   public void onStartup(ServletContext servletContext) throws ServletException {
     configureAthmosphere(atmosphereServlet(), servletContext);
