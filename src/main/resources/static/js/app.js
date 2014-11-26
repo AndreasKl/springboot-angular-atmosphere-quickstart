@@ -22,8 +22,16 @@
     var websocketSubSocket;
     var websocketTransport = 'websocket';
 
+    function getUrl() {
+      var url = window.location.origin;
+      if (url.contains('cfapps.io')) {
+        url = url + ':4443';
+      }
+      return url + '/websocket/toast';
+    }
+    
     var websocketRequest = {
-      url : '/websocket/toast',
+      url : getUrl(),
       contentType : "application/json",
       transport : websocketTransport,
       trackMessageLength : true,
