@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+
 /**
  * Demo controller.
  * 
@@ -24,7 +27,8 @@ public class HomeController {
   /**
    * Creates a new instance of {@link HomeController}.
    * 
-   * @param metaBroadcaster the atmosphere meta broadcaster.
+   * @param metaBroadcaster
+   *          the atmosphere meta broadcaster.
    */
   @Autowired
   public HomeController(MetaBroadcaster metaBroadcaster) {
@@ -47,12 +51,21 @@ public class HomeController {
   /**
    * Broadcast a message to all registered clients.
    * 
-   * @param message to broadcast.
+   * @param message
+   *          to broadcast.
+   * @throws InterruptedException
    */
+  @HystrixCommand(commandProperties = {
+      @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "100"),
+      @HystrixProperty(name = "execution.isolation.thread.interruptOnTimeout", value = "true") })
   @RequestMapping(value = "/broadcast/{message}", method = RequestMethod.GET)
   @ResponseStatus(value = HttpStatus.OK)
   public void broadcast(@PathVariable("message") String message) {
     broadcaster.broadcastTo(ToastService.PATH, message);
+  }
+
+  public void fallback(String message) {
+    broadcaster.broadcastTo(ToastService.PATH, "fallback: " + message);
   }
 
 }
