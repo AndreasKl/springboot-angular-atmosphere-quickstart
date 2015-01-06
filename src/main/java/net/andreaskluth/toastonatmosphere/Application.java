@@ -1,8 +1,7 @@
 package net.andreaskluth.toastonatmosphere;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Application root, to disable the thymeleaf template cache run the application
@@ -12,8 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * 
  * @author Andreas Kluth
  */
-@EnableAutoConfiguration
-@ComponentScan
+@SpringBootApplication
 public class Application {
 
   public static void main(String[] args) {
