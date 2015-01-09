@@ -1,0 +1,16 @@
+{
+    "app_name": "toast-on-atmosphere",
+    "services": [
+        {
+            "service_name": "frontend",
+            "components": [
+                {
+                    "component_name": "frontend",
+                    "image": "registry.giantswarm.io/andreas/toast-on-atmosphere",
+                    "ports": [ "8080/tcp" ],
+                    "domains": { "andreas.gigantic.io": "8080" }
+                }
+            ]
+        }
+    ]
+}
