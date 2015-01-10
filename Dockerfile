@@ -8,4 +8,4 @@ WORKDIR /code
 RUN ["mvn", "clean", "install"]
 
 EXPOSE 8080
-CMD ["java", "-jar", "target/toast-on-atmosphere-0.0.6-SNAPSHOT.jar"]
+CMD ["java", "-Xss256k -Xms128m -Xmx386m -jar", "target/toast-on-atmosphere-0.0.6-SNAPSHOT.jar"]
