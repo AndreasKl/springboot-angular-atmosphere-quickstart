@@ -14,7 +14,9 @@ WORKDIR /code
 RUN mvn clean install \
     && mkdir /app \
     && cp target/toast-on-atmosphere-0.0.6-SNAPSHOT.jar /app \
-    && rm -rf /code && rm -rf /usr/share/maven-repo
+    && rm -rf /code && rm -rf /root/.m2/ \
+    && apt-get -y purge maven \
+    && apt-get clean
 
 # Switch to the jar
 WORKDIR /app
