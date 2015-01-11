@@ -9,13 +9,12 @@ ADD . /code
 WORKDIR /code
 
 # Build the app
-RUN mvn clean install
-
 # Copy the jar and remove the code.
-RUN mkdir /app && cp target/toast-on-atmosphere-0.0.6-SNAPSHOT.jar /app && rm -rf /code
-
 # Remove the now obsolete mvn cache
-RUN rm -rf /usr/share/maven-repo
+RUN mvn clean install \
+    && mkdir /app \
+    && cp target/toast-on-atmosphere-0.0.6-SNAPSHOT.jar /app \
+    && rm -rf /code && rm -rf /usr/share/maven-repo
 
 # Switch to the jar
 WORKDIR /app
